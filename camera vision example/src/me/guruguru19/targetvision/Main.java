@@ -42,6 +42,7 @@ public class Main {
                 processedFrame = TargetDetection.processedFrame(frame);
                 TargetDetection.drawImage(processedFrame, processedFeed);
                 TargetDetection.markOuterContour(processedFrame,frame);
+                System.out.println(TargetDetection.markMiddleOfContour(processedFrame,frame));
                 TargetDetection.drawImage(frame, cameraFeed);
             }
         };

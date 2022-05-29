@@ -100,6 +100,7 @@ public class ThresholdInRange {
                     new Scalar(sliderHighH.getValue(), sliderHighS.getValue(), sliderHighV.getValue()),
                     thresh);
             update(frame, thresh);
+            System.out.println("LOW: "+new Scalar(sliderLowH.getValue(), sliderLowS.getValue(), sliderLowV.getValue())+", HIGH; "+new Scalar(sliderHighH.getValue(), sliderHighS.getValue(), sliderHighV.getValue()));
         }
     }
     private void addComponentsToPane(Container pane, Image img) {
