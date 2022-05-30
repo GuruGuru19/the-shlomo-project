@@ -6,6 +6,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import me.guruguru19.trajectorygraphing.Main;
+import me.guruguru19.trajectorygraphing.ui.controllers.AppController;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -30,7 +32,8 @@ public class App extends Application {
 
         stage.setScene(new Scene(root, 1920,1080));
         stage.show();
-
+        System.out.println("111");
+        Main.vision(((AppController)loader.getController()).getCameraFrame());
     }
 
     private static final Pattern URL_QUICKMATCH = Pattern.compile("^\\p{Alpha}[\\p{Alnum}+.-]:.$");

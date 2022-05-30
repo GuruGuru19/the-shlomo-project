@@ -24,19 +24,14 @@ public class Main {
         final VideoCapture camera = new VideoCapture(0);
 
         Main.startTargetDetection(cameraFeed, processedFeed, camera).run();
-//        javax.swing.SwingUtilities.invokeLater(new Runnable() {
-//            @Override
-//            public void run() {
-//                new run(args);
-//            }
-//        });
+//
     }
     private static Runnable startTargetDetection(final JPanel cameraFeed,
                                                  final JPanel processedFeed,
                                                  final VideoCapture camera){
         return ()->{
             final Mat frame = new Mat();
-            Mat processedFrame = new Mat();
+            Mat processedFrame;
             while (true){
                 camera.read(frame);
                 processedFrame = TargetDetection.processedFrame(frame);
