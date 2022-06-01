@@ -34,8 +34,16 @@ public class TargetDetection {
 
     private static final int AREA_FILTER = 500;
 
-    private static final int CAMERA_FOV_X = 16;
-    private static final int CAMERA_FOV_Y = 9;
+    private static int CAMERA_FOV_X = 16;
+    private static int CAMERA_FOV_Y = 9;
+
+    public static void setCameraFovX(int cameraFovX) {
+        CAMERA_FOV_X = cameraFovX;
+    }
+
+    public static void setCameraFovY(int cameraFovY) {
+        CAMERA_FOV_Y = cameraFovY;
+    }
 
     public static void createJFrame(final JPanel... panels){
         final JFrame window = new JFrame("Shape Detection");

@@ -8,7 +8,8 @@ import java.util.ArrayList;
 public class TrajectoryCalc {
     public enum CalcOperations {
         SET_TARGET_HIGHT,
-        SET_TARGET_AREA
+        SET_TARGET_AREA,
+        SET_TARGET
     }
 
     private static double targetHight = 1;
@@ -26,15 +27,18 @@ public class TrajectoryCalc {
 
     private static final double g = 9.81;
 
-    public void setInitialState(double cameraAngle, double cameraHight, double dragCoefficient, double projectileMass, double dt, CalcOperations calcOperation, double setValue){
+    public static void setInitialState(double cameraAngle, double cameraHight, double dragCoefficient, double projectileMass, double dt, CalcOperations calcOperation, double targetHight, double targetDistance, double targetArea){
         TrajectoryCalc.cameraAngle = cameraAngle;
         TrajectoryCalc.cameraHight = cameraHight;
         TrajectoryCalc.dragCoefficient = dragCoefficient;
         TrajectoryCalc.projectileMass = projectileMass;
         TrajectoryCalc.dt = dt;
-        if (calcOperation == CalcOperations.SET_TARGET_HIGHT){
-            TrajectoryCalc.targetHight = setValue;
-        }
+
+        TrajectoryCalc.calcOperation = calcOperation;
+
+        TrajectoryCalc.targetHight = targetHight;
+        TrajectoryCalc.targetDistance = targetDistance;
+        TrajectoryCalc.targetArea = targetArea;
     }
 
     public static double getDt() {

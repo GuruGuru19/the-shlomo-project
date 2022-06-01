@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.LineChart?>
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Button?>
@@ -24,7 +23,7 @@
                               <ImageView fx:id="snapFrame" fitHeight="240.0" fitWidth="320.0" layoutX="326.0" layoutY="471.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="320.0" AnchorPane.topAnchor="480.0" />
                            </children>
                         </AnchorPane>
-                      <AnchorPane minHeight="0.0" minWidth="0.0">
+                      <AnchorPane minHeight="0.0" minWidth="0.0" style="-fx-background-color: #E0E0E0;">
                            <children>
                               <Button id="settingsButton" fx:id="settingsButton" layoutX="168.0" layoutY="122.0" mnemonicParsing="false" onAction="#settingsButtonPressed" prefHeight="100.0" prefWidth="320.0" text="settings" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0">
                                  <font>
@@ -54,7 +53,7 @@
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0">
                <children>
-                  <LineChart id="graphChart" fx:id="graphChart" animated="false" prefHeight="1050.0" prefWidth="1343.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <LineChart id="graphChart" fx:id="graphChart" animated="false" prefHeight="1050.0" prefWidth="1343.0" style="-fx-background-color: #E9E9E9;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <xAxis>
                       <NumberAxis side="BOTTOM" />
                     </xAxis>

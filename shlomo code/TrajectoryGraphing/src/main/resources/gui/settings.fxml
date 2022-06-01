@@ -2,47 +2,46 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #3271c6; -fx-border-color: black;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="me.guruguru19.trajectorygraphing.gui.controllers.SettingsController">
-   <Button layoutX="611.0" layoutY="662.0" mnemonicParsing="false" onAction="#saveButton" text="SAVE" textAlignment="CENTER" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="500.0" AnchorPane.rightAnchor="500.0">
+   <Button fx:id="saveButton" disable="true" layoutX="611.0" layoutY="662.0" mnemonicParsing="false" onAction="#saveButtonPressed" prefHeight="40.0" prefWidth="175.0" text="SAVE &amp; EXIT" textAlignment="CENTER" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="450.0">
       <font>
          <Font name="System Bold" size="18.0" />
       </font></Button>
-   <TextField id="ballDiameter" fx:id="ball_diameter_textField" layoutX="491.0" layoutY="59.0" promptText="ball diameter">
+   <TextField id="ballDiameter" fx:id="ballDiameterBox" layoutX="491.0" layoutY="111.0" promptText="ball diameter">
       <font>
          <Font size="18.0" />
       </font></TextField>
-   <CheckBox layoutX="491.0" layoutY="21.0" mnemonicParsing="false" text="Ball (Cd =0.47)" textFill="WHITE">
+   <CheckBox fx:id="isBallBox" layoutX="491.0" layoutY="72.0" mnemonicParsing="false" onAction="#isBallBoxChanged" selected="true" text="Ball (Cd =0.47)" textFill="WHITE">
       <font>
          <Font size="18.0" />
       </font>
    </CheckBox>
-   <TextField layoutX="32.0" layoutY="79.0" promptText="Camera mounting angle">
+   <TextField fx:id="cameraMountingAngleBox" layoutX="32.0" layoutY="79.0" promptText="Camera mounting angle">
       <font>
          <Font size="18.0" />
       </font>
    </TextField>
-   <TextField layoutX="32.0" layoutY="130.0" promptText="Camera mounting hight">
+   <TextField fx:id="cameraMountingHightBox" layoutX="32.0" layoutY="130.0" promptText="Camera mounting hight">
       <font>
          <Font size="18.0" />
       </font>
    </TextField>
-   <TextField layoutX="32.0" layoutY="223.0" promptText="Target hight [m]">
+   <TextField fx:id="targetHightBox" layoutX="32.0" layoutY="334.0" onAction="#checkSave" onInputMethodTextChanged="#checkSave" promptText="Target hight [m]">
       <font>
          <Font size="18.0" />
       </font>
    </TextField>
-   <TextField layoutX="32.0" layoutY="283.0" promptText="Target distance [m]">
+   <TextField fx:id="targetDistanceBox" layoutX="32.0" layoutY="387.0" onAction="#checkSave" onInputMethodTextChanged="#checkSave" promptText="Target distance [m]">
       <font>
          <Font size="18.0" />
       </font>
    </TextField>
-   <TextField layoutX="32.0" layoutY="341.0" promptText="Target Area [m^3]">
+   <TextField fx:id="targetAreaBox" layoutX="32.0" layoutY="441.0" onAction="#checkSave" onInputMethodTextChanged="#checkSave" promptText="Target Area [m^3]">
       <font>
          <Font size="18.0" />
       </font>
@@ -52,15 +51,50 @@
          <Font name="Arial Bold" size="24.0" />
       </font>
    </Text>
-   <Text fill="WHITE" layoutX="32.0" layoutY="207.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Target location">
+   <Text fill="WHITE" layoutX="32.0" layoutY="311.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Target location">
       <font>
          <Font name="Arial Bold" size="24.0" />
       </font>
    </Text>
-   <Text fill="WHITE" layoutX="32.0" layoutY="424.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Other">
+   <Text fill="WHITE" layoutX="32.0" layoutY="524.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Other">
       <font>
          <Font name="Arial Bold" size="24.0" />
       </font>
    </Text>
-   <ComboBox editable="true" layoutX="32.0" layoutY="437.0" prefHeight="25.0" prefWidth="224.0" promptText="dt" />
+   <TextField fx:id="camera_FOV_Y_Box" layoutX="32.0" layoutY="187.0" promptText="Camera FOV Y">
+      <font>
+         <Font size="18.0" />
+      </font>
+   </TextField>
+   <TextField id="ballDiameter" fx:id="projectileMassBox" layoutX="488.0" layoutY="270.0" promptText="projectile mass">
+      <font>
+         <Font size="18.0" />
+      </font>
+   </TextField>
+   <Button fx:id="exitButton" layoutX="502.0" layoutY="670.0" mnemonicParsing="false" onAction="#exitButtonPressed" prefHeight="40.0" prefWidth="175.0" text="EXIT" textAlignment="CENTER" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="450.0">
+      <font>
+         <Font name="System Bold" size="18.0" />
+      </font>
+   </Button>
+   <TextField fx:id="oneOverDtBox" layoutX="32.0" layoutY="537.0" promptText="Samples per secend">
+      <font>
+         <Font size="18.0" />
+      </font>
+   </TextField>
+   <Text fill="WHITE" layoutX="491.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Drag force settings">
+      <font>
+         <Font name="Arial Bold" size="24.0" />
+      </font>
+   </Text>
+   <TextField id="ballDiameter" fx:id="densityOfFluidBox" layoutX="488.0" layoutY="321.0" prefHeight="39.0" prefWidth="224.0" promptText="density of fluid (leave empty for air)" />
+   <TextField id="ballDiameter" fx:id="projectileCrossSectionalAreaBox" disable="true" layoutX="491.0" layoutY="159.0" prefHeight="39.0" prefWidth="224.0" promptText="Projectile cross sectional area">
+      <font>
+         <Font size="14.0" />
+      </font>
+   </TextField>
+   <TextField id="ballDiameter" fx:id="dragCoefficientBox" disable="true" layoutX="491.0" layoutY="207.0" prefHeight="39.0" prefWidth="224.0" promptText="Projectile drag coefficient (Cd)">
+      <font>
+         <Font size="14.0" />
+      </font>
+   </TextField>
 </AnchorPane>
