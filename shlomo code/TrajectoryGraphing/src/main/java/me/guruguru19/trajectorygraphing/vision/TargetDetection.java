@@ -3,6 +3,7 @@ package me.guruguru19.trajectorygraphing.vision;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
+import me.guruguru19.trajectorygraphing.trajectory.Target;
 import org.opencv.core.*;
 import org.opencv.core.Point;
 import org.opencv.imgproc.Imgproc;
@@ -127,8 +128,8 @@ public class TargetDetection {
     }
 
 
-    public static Point markMiddleOfContour(final Mat processedImage,
-                                            final Mat originalImage) {
+    public static Target markMiddleOfContour(final Mat processedImage,
+                                             final Mat originalImage) {
         // Find contours of an image
         final List<MatOfPoint> allContours = new ArrayList<>();
         Imgproc.findContours(
@@ -184,9 +185,10 @@ public class TargetDetection {
                     return isNotNoise;
                 }).collect(Collectors.toList());
         if (maxContour.get() != null){
-            return getCenterOfMass(maxContour.get());
+            Point p = convertToDeg(getCenterOfMass(maxContour.get()),originalImage);
+            return new Target(p.x, p.y, Imgproc.contourArea(maxContour.get()));
         }
-        return new Point(-1,-1);
+        return new Target(-180,-180, 0);
     }
 
     private static Point getCenterOfMass(MatOfPoint contour) {

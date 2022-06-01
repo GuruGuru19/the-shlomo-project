@@ -1,4 +1,4 @@
-package me.guruguru19.trajectorygraphing.ui.controllers;
+package me.guruguru19.trajectorygraphing.gui.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

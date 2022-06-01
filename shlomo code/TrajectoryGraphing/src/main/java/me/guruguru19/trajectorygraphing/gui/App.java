@@ -1,4 +1,4 @@
-package me.guruguru19.trajectorygraphing.ui;
+package me.guruguru19.trajectorygraphing.gui;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -7,7 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import me.guruguru19.trajectorygraphing.Main;
-import me.guruguru19.trajectorygraphing.ui.controllers.AppController;
+import me.guruguru19.trajectorygraphing.gui.controllers.AppController;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -19,10 +19,13 @@ public class App extends Application {
         launch(args);
     }
 
+    private static Stage appStage;
+
     @Override
     public void start(Stage stage) throws Exception {
+        appStage = stage;
         stage.setTitle("Trajectory Graph");
-        stage.setResizable(false);
+        //stage.setResizable(false);
         stage.getIcons().add(new Image("/img/icon.png"));
         stage.setOnCloseRequest(e -> System.exit(0));
 
@@ -32,8 +35,12 @@ public class App extends Application {
 
         stage.setScene(new Scene(root, 1920,1080));
         stage.show();
-        System.out.println("111");
-        Main.vision(((AppController)loader.getController()).getCameraFrame());
+        AppController appController = (AppController)loader.getController();
+        Main.vision(appController.getCameraFrame(), appController.getThresholdFrame());
+    }
+
+    public static Stage getAppStage() {
+        return appStage;
     }
 
     private static final Pattern URL_QUICKMATCH = Pattern.compile("^\\p{Alpha}[\\p{Alnum}+.-]:.$");

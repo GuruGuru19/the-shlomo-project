@@ -1,13 +1,12 @@
 package me.guruguru19.trajectorygraphing;
 
 import javafx.scene.image.ImageView;
-import me.guruguru19.trajectorygraphing.ui.App;
+import me.guruguru19.trajectorygraphing.gui.App;
+import me.guruguru19.trajectorygraphing.trajectory.GraphDrawer;
 import me.guruguru19.trajectorygraphing.vision.TargetDetection;
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
 import org.opencv.videoio.VideoCapture;
-
-import javax.swing.*;
 
 public class Main {
 
@@ -20,21 +19,23 @@ public class Main {
         app.startApp(args);
     }
 
-    public static void vision(ImageView cameraFeed){
-        final JPanel cameraPanel = new JPanel();
-        TargetDetection.createJFrame(cameraPanel);
+    public static void vision(ImageView cameraFeed, ImageView thresholdFeed){
+//        final JPanel cameraPanel = new JPanel();
+//        TargetDetection.createJFrame(cameraPanel);
         new Thread(() -> {
             final VideoCapture camera = new VideoCapture(0);
             final Mat frame = new Mat();
+            final Mat frame2 = new Mat();
             Mat processedFrame;
             while (true){
                 camera.read(frame);
-
+                camera.read(frame2);
+                GraphDrawer.updateFrame(frame2);
                 processedFrame = TargetDetection.processedFrame(frame);
                 TargetDetection.markOuterContour(processedFrame,frame);
-                System.out.println(TargetDetection.markMiddleOfContour(processedFrame,frame));
+                TargetDetection.markMiddleOfContour(processedFrame,frame);
                 TargetDetection.drawImage(frame, cameraFeed);
-                TargetDetection.drawImage(processedFrame, cameraPanel);
+                TargetDetection.drawImage(processedFrame, thresholdFeed);
             }
         }).start();
 

@@ -1,4 +1,4 @@
-package me.guruguru19.trajectorygraphing.ui;
+package me.guruguru19.trajectorygraphing.gui;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
