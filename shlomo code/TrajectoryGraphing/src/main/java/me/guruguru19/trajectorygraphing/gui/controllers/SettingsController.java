@@ -149,7 +149,6 @@ public class SettingsController {
             operation = TrajectoryCalc.CalcOperations.SET_TARGET_AREA;
         }
 
-
         TrajectoryCalc.setInitialState(mountingAngle, mountingHight, dragCoefficient, projectileMass, dt, operation, targetHight, targetDistance, targetArea);
 
         Stage window = (Stage)((Node)e.getSource()).getScene().getWindow();

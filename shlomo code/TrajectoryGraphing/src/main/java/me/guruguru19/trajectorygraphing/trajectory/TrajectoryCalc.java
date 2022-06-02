@@ -21,7 +21,7 @@ public class TrajectoryCalc {
     private static double cameraHight = 0;
     private static double dragCoefficient = 0;//not Cd!!!! but 1/2*Cd*p*A
     private static double projectileMass = 0;
-    private static double dt = 0.005;
+    private static double dt = 0.0005;
 
     private static CalcOperations calcOperation = CalcOperations.SET_TARGET_HIGHT;
 
@@ -35,6 +35,7 @@ public class TrajectoryCalc {
         TrajectoryCalc.cameraAngle = cameraAngle;
         TrajectoryCalc.cameraHight = cameraHight;
         TrajectoryCalc.dragCoefficient = dragCoefficient;
+        System.out.println(dragCoefficient);
         TrajectoryCalc.projectileMass = projectileMass;
         TrajectoryCalc.dt = dt;
 
@@ -56,23 +57,87 @@ public class TrajectoryCalc {
     public static LunchPlan calc(double tx, double ty, double ta){
         System.out.println(calcOperation);
         System.out.println(targetDistance+", "+targetHight);
+        correct(tx, ty, ta);
         if (dragCoefficient == 0){
             System.out.println("no drag");
-            return calcNoDrag(tx, ty, ta);
+            return calcNoDrag();
         }
-        return calcWithDrag(tx, ty, ta);
+        return calcWithDrag();
     }
 
-    private static LunchPlan calcWithDrag(double tx, double ty, double ta){
+
+    private static LunchPlan calcWithDrag(){
+        double at = radToDeg(Math.atan((targetHight-cameraHight)/(targetDistance)));
+        double a0 = at +20;
+
+        double t = 0;//time
+        double a = 0;//heading angle
+        double v0 = 0;//initial velocity
+
+        double x = 0;//x
+        double y = 0;//y
+        double vx = 0;// x-axis velocity
+        double vy = 0;// y-axis velocity
+        double ax = 0;// x-axis acceleration
+        double ay = 0;// y-axis acceleration
 
 
 
+        double err = Double.POSITIVE_INFINITY;//error
+        double bestErr = err;
+        LunchPlan bestTrajectory = new LunchPlan(0,0,new ArrayList<>());
+        double lastErr = err;
 
-        return null;
+        ArrayList<Point> trajectory;
+
+
+        while (v0 <= 20 && t<=60){//setting the maximum time to 1 minute
+            v0+=0.001;
+            t=0;
+            vx = v0 * Math.cos(degToRad(a0));
+            vy = v0 * Math.sin(degToRad(a0));
+            x=0;
+            y=cameraHight;
+            trajectory = new ArrayList<>();
+            lastErr = err;
+            while ((!(t!=0&&y<=0))&&x<targetDistance){
+                trajectory.add(new Point(x,y));
+                x+=vx*dt;
+                y+=vy*dt;
+                ax = -((vx*vx*dragCoefficient)/projectileMass);
+                ay = -((vy*vy*dragCoefficient)/projectileMass)-g;
+                vx += ax*dt;
+                vy += ay*dt;
+                t+=dt;
+
+            }
+            err = err(trajectory, targetDistance,targetHight);
+            if (err<bestErr){
+                bestErr =err;
+                bestTrajectory = new LunchPlan(v0, a0, trajectory);
+                //System.out.println(bestTrajectory.hashCode());
+            }
+            System.out.println(v0 +", "+ t +", " + err);
+        }
+        //System.out.println(bestTrajectory.hashCode());
+        return bestTrajectory;
     }
 
-    private static LunchPlan calcNoDrag(double tx, double ty, double ta){
-        correct(tx, ty, ta);
+    private static double pythagoreanTheorem(double v1, double v2){
+        return Math.sqrt(v1*v1+v2*v2);
+    }
+
+    private static double err(ArrayList<Point> list, double x, double y){
+        double min = Double.POSITIVE_INFINITY;
+        for (Point p: list) {
+            if (min > pythagoreanTheorem(p.x-x,p.y-y)){
+                min = pythagoreanTheorem(p.x-x,p.y-y);
+            }
+        }
+        return min;
+    }
+
+    private static LunchPlan calcNoDrag(){
         double A = -((targetHight-cameraHight)/(targetDistance*targetDistance));
         double B = -2*A*targetDistance;
         double C = cameraHight;
