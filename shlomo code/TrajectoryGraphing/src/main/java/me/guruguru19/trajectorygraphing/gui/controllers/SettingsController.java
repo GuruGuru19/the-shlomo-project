@@ -73,6 +73,10 @@ public class SettingsController {
 
     @FXML
     private void saveButtonPressed(ActionEvent e){
+        TrajectoryCalc.setDisplay_ballDiameter(ballDiameterBox.getText());
+        TrajectoryCalc.setDisplay_crossSectionalArea(projectileCrossSectionalAreaBox.getText());
+        TrajectoryCalc.setDisplay_Cd(dragCoefficientBox.getText());
+
         double mountingAngle = 0;
         if (cameraMountingAngleBox.getText() != ""){
             mountingAngle = Double.parseDouble(cameraMountingAngleBox.getText());
@@ -158,4 +162,34 @@ public class SettingsController {
         window.close();
     }
 
+    public void init(){
+        ballDiameterBox.setText(TrajectoryCalc.getDisplay_ballDiameter());
+        projectileCrossSectionalAreaBox.setText(TrajectoryCalc.getDisplay_crossSectionalArea());
+        dragCoefficientBox.setText(TrajectoryCalc.getDisplay_Cd());
+
+        if (TrajectoryCalc.getCameraAngle() != 0){
+            cameraMountingAngleBox.setText(String.valueOf(TrajectoryCalc.getCameraAngle()));
+        }
+        if (TrajectoryCalc.getCameraHight() != 0){
+            cameraMountingHightBox.setText(String.valueOf(TrajectoryCalc.getCameraHight()));
+        }
+
+        if (TrajectoryCalc.getTargetDistance() != -1){
+            targetDistanceBox.setText(String.valueOf(TrajectoryCalc.getTargetDistance()));
+        }
+        if (TrajectoryCalc.getTargetArea() != 0){
+            targetAreaBox.setText(String.valueOf(TrajectoryCalc.getTargetArea()));
+        }
+        if (TrajectoryCalc.getTargetHight() != 0){
+            targetHightBox.setText(String.valueOf(TrajectoryCalc.getTargetHight()));
+        }
+
+        if (TrajectoryCalc.getProjectileMass() != 0){
+            projectileMassBox.setText(String.valueOf(TrajectoryCalc.getProjectileMass()));
+        }
+
+
+        //camera_FOV_Y_Box.setText();
+
+    }
 }

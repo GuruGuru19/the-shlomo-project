@@ -12,8 +12,8 @@ public class TrajectoryCalc {
         SET_TARGET
     }
 
-    private static double targetHight = 1;
-    private static double targetDistance = 1;
+    private static double targetHight = 0;
+    private static double targetDistance = -1;
     private static double targetXOffSet = 0;
     private static double targetArea = 0;
 
@@ -26,6 +26,10 @@ public class TrajectoryCalc {
     private static CalcOperations calcOperation = CalcOperations.SET_TARGET_HIGHT;
 
     private static final double g = 9.81;
+
+    private static String display_ballDiameter = "";
+    private static String display_crossSectionalArea = "";
+    private static String display_Cd = "";
 
     public static void setInitialState(double cameraAngle, double cameraHight, double dragCoefficient, double projectileMass, double dt, CalcOperations calcOperation, double targetHight, double targetDistance, double targetArea){
         TrajectoryCalc.cameraAngle = cameraAngle;
@@ -49,30 +53,26 @@ public class TrajectoryCalc {
         return 0.5*cross_sectional_area*density_of_fluid*drag_coefficient;
     }
 
-    public static LunchPlan calc(double tx, double ty, double targetArea){
-        if (calcOperation == CalcOperations.SET_TARGET_HIGHT){
-            if (dragCoefficient == 0){
-                return calcHNoDrag(tx,ty);
-            }
-            return null;
+    public static LunchPlan calc(double tx, double ty, double ta){
+        System.out.println(calcOperation);
+        System.out.println(targetDistance+", "+targetHight);
+        if (dragCoefficient == 0){
+            System.out.println("no drag");
+            return calcNoDrag(tx, ty, ta);
         }
-        if (calcOperation == CalcOperations.SET_TARGET_AREA){
-            return calcA(tx,ty,targetArea);
-        }
+        return calcWithDrag(tx, ty, ta);
+    }
+
+    private static LunchPlan calcWithDrag(double tx, double ty, double ta){
+
+
+
+
         return null;
     }
 
-    private static LunchPlan calcA(double tx, double ty, double targetArea){
-
-
-
-
-        return null;
-    }
-
-    private static LunchPlan calcHNoDrag(double tx, double ty){
-        tx = 45;
-        targetDistance = (targetHight-cameraAngle)/Math.tan(degToRad(cameraAngle+tx));
+    private static LunchPlan calcNoDrag(double tx, double ty, double ta){
+        correct(tx, ty, ta);
         double A = -((targetHight-cameraHight)/(targetDistance*targetDistance));
         double B = -2*A*targetDistance;
         double C = cameraHight;
@@ -86,6 +86,15 @@ public class TrajectoryCalc {
         return new LunchPlan(v0, a0, trajectory);
     }
 
+    public static void correct(double tx, double ty, double ta){
+        if (calcOperation == CalcOperations.SET_TARGET_HIGHT){
+            targetDistance = (targetHight-cameraAngle)/Math.tan(degToRad(cameraAngle+tx));
+        }
+        if (calcOperation == CalcOperations.SET_TARGET_AREA){
+            //TODO: calc
+        }
+    }
+
     private static double degToRad(double v){
         return v*Math.PI/180;
     }
@@ -93,4 +102,70 @@ public class TrajectoryCalc {
     private static double radToDeg(double v){
         return v*180/Math.PI;
     }
+
+    public static double getTargetHight() {
+        return targetHight;
+    }
+
+    public static double getTargetDistance() {
+        return targetDistance;
+    }
+
+    public static double getTargetXOffSet() {
+        return targetXOffSet;
+    }
+
+    public static double getTargetArea() {
+        return targetArea;
+    }
+
+    public static double getCameraAngle() {
+        return cameraAngle;
+    }
+
+    public static double getCameraHight() {
+        return cameraHight;
+    }
+
+    public static double getDragCoefficient() {
+        return dragCoefficient;
+    }
+
+    public static double getProjectileMass() {
+        return projectileMass;
+    }
+
+    public static CalcOperations getCalcOperation() {
+        return calcOperation;
+    }
+
+
+    public static void setTargetHight(double targetHight) {
+        TrajectoryCalc.targetHight = targetHight;
+    }
+
+    public static void setDisplay_ballDiameter(String m_ballDiameter) {
+        TrajectoryCalc.display_ballDiameter = m_ballDiameter;
+    }
+
+    public static void setDisplay_crossSectionalArea(String m_crossSectionalArea) {
+        TrajectoryCalc.display_crossSectionalArea = m_crossSectionalArea;
+    }
+
+    public static void setDisplay_Cd(String m_Cd) {
+        TrajectoryCalc.display_Cd = m_Cd;
+    }
+
+    public static String getDisplay_ballDiameter() {
+        return display_ballDiameter;
+    }
+
+    public static String getDisplay_crossSectionalArea() {
+        return display_crossSectionalArea;
+    }
+
+    public static String getDisplay_Cd() {
+        return display_Cd;
+    }
+
 }

@@ -14,10 +14,8 @@ import me.guruguru19.trajectorygraphing.trajectory.GraphDrawer;
 import me.guruguru19.trajectorygraphing.trajectory.LunchPlan;
 import me.guruguru19.trajectorygraphing.trajectory.Target;
 import me.guruguru19.trajectorygraphing.trajectory.TrajectoryCalc;
-import org.opencv.core.Point;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 public class AppController {
     @FXML

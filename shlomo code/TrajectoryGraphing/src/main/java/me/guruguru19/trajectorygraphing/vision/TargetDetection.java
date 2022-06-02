@@ -73,8 +73,10 @@ public class TargetDetection {
 
         final Mat erodedFrame = new Mat(frame.height(), frame.width(), frame.type());
         Imgproc.erode(thresholdFrame, erodedFrame, new Mat(),new Point(-1,-1));
+        final Mat dilatedFrame = new Mat(frame.height(), frame.width(), frame.type());
+        Imgproc.dilate(erodedFrame, dilatedFrame, new Mat(), new Point(-1,-1));
 
-        return erodedFrame;
+        return dilatedFrame;
     }
 
     public static void markOuterContour(final Mat processedImage,
