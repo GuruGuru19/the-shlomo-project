@@ -35,7 +35,7 @@ public class TargetDetection {
     private static final int AREA_FILTER = 500;
 
     private static int CAMERA_FOV_X = 16;
-    private static int CAMERA_FOV_Y = 9;
+    private static int CAMERA_FOV_Y = 0;
 
     public static void setCameraFovX(int cameraFovX) {
         CAMERA_FOV_X = cameraFovX;

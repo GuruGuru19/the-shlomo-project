@@ -34,13 +34,4 @@ public class Target {
     public void setMa(double ma) {
         this.ma = ma;
     }
-
-    @Override
-    public String toString() {
-        return "Target{" +
-                "mx=" + mx +
-                ", my=" + my +
-                ", ma=" + ma +
-                '}';
-    }
 }

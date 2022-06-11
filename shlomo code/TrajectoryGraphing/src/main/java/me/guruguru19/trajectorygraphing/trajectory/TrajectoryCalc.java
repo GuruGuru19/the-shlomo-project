@@ -54,7 +54,7 @@ public class TrajectoryCalc {
         return 0.5*cross_sectional_area*density_of_fluid*drag_coefficient;
     }
 
-    public static LunchPlan calc(double tx, double ty, double ta){
+    public static LaunchPlan calc(double tx, double ty, double ta){
         System.out.println(calcOperation);
         System.out.println(targetDistance+", "+targetHight);
         correct(tx, ty, ta);
@@ -62,13 +62,21 @@ public class TrajectoryCalc {
             System.out.println("no drag");
             return calcNoDrag();
         }
-        return calcWithDrag();
+
+        LaunchPlan p1 = calcWithDrag(10);
+        LaunchPlan p2 = calcWithDrag(20);
+        System.out.println("p1.getTime() = "+p1.getTime());
+        System.out.println("p2.getTime() = "+p2.getTime());
+        if (p1.getTime()<p2.getTime()){
+            return p1;
+        }
+        return p2;
     }
 
 
-    private static LunchPlan calcWithDrag(){
+    private static LaunchPlan calcWithDrag(double angleOffSet){
         double at = radToDeg(Math.atan((targetHight-cameraHight)/(targetDistance)));
-        double a0 = at +20;
+        double a0 = at + angleOffSet;
 
         double t = 0;//time
         double a = 0;//heading angle
@@ -85,13 +93,13 @@ public class TrajectoryCalc {
 
         double err = Double.POSITIVE_INFINITY;//error
         double bestErr = err;
-        LunchPlan bestTrajectory = new LunchPlan(0,0,new ArrayList<>());
+        LaunchPlan bestTrajectory = new LaunchPlan(0,0,new ArrayList<>(), 0);
         double lastErr = err;
 
         ArrayList<Point> trajectory;
 
 
-        while (v0 <= 20 && t<=60){//setting the maximum time to 1 minute
+        while (v0 <= 10000 && t<=60){//setting the maximum time to 1 minute
             v0+=0.001;
             t=0;
             vx = v0 * Math.cos(degToRad(a0));
@@ -114,10 +122,8 @@ public class TrajectoryCalc {
             err = err(trajectory, targetDistance,targetHight);
             if (err<bestErr){
                 bestErr =err;
-                bestTrajectory = new LunchPlan(v0, a0, trajectory);
-                //System.out.println(bestTrajectory.hashCode());
+                bestTrajectory = new LaunchPlan(v0, a0, trajectory, t);
             }
-            System.out.println(v0 +", "+ t +", " + err);
         }
         //System.out.println(bestTrajectory.hashCode());
         return bestTrajectory;
@@ -137,18 +143,24 @@ public class TrajectoryCalc {
         return min;
     }
 
-    private static LunchPlan calcNoDrag(){
+    private static LaunchPlan calcNoDrag(){
+
         double A = -((targetHight-cameraHight)/(targetDistance*targetDistance));
         double B = -2*A*targetDistance;
         double C = cameraHight;
+
+
+        double a0 = radToDeg(Math.atan(B));
+        double v0 = Math.sqrt((2*targetDistance*g)/(Math.sin(degToRad(2*a0))));
+
         ArrayList<Point> trajectory = new ArrayList<>();
         for (double x = 0; x<=targetDistance; x+=dt){
             trajectory.add(new Point(x, A*x*x+B*x+C));
         }
-        double a0 = radToDeg(Math.atan(B));
-        double v0 = Math.sqrt((2*targetDistance*g)/(Math.sin(degToRad(2*a0))));
-
-        return new LunchPlan(v0, a0, trajectory);
+        if (A>=0){
+            return new LaunchPlan(Double.NaN, a0, trajectory, -1);
+        }
+        return new LaunchPlan(v0, a0, trajectory, -1);
     }
 
     public static void correct(double tx, double ty, double ta){

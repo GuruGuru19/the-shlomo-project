@@ -30,6 +30,4 @@ public class SettingsWindow {
         settingsController.init();
         stage.show();
     }
-
-
 }

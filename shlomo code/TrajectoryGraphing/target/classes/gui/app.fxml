@@ -25,22 +25,17 @@
                         </AnchorPane>
                       <AnchorPane minHeight="0.0" minWidth="0.0" style="-fx-background-color: #E0E0E0;">
                            <children>
-                              <Button id="settingsButton" fx:id="settingsButton" layoutX="168.0" layoutY="122.0" mnemonicParsing="false" onAction="#settingsButtonPressed" prefHeight="100.0" prefWidth="320.0" text="settings" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0">
+                              <Button id="settingsButton" fx:id="settingsButton" layoutX="168.0" layoutY="122.0" mnemonicParsing="false" onAction="#settingsButtonPressed" prefHeight="100.0" prefWidth="200.0" text="settings" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0">
                                  <font>
                                     <Font name="Arial Bold" size="22.0" />
                                  </font>
                               </Button>
-                              <Button id="settingsButton" fx:id="clearButton" layoutX="318.0" layoutY="328.0" mnemonicParsing="false" onAction="#clearButtonPressed" prefHeight="100.0" prefWidth="320.0" text="clear" AnchorPane.bottomAnchor="100.0" AnchorPane.rightAnchor="0.0">
+                              <Button id="settingsButton" fx:id="clearButton" layoutX="318.0" layoutY="328.0" mnemonicParsing="false" onAction="#clearButtonPressed" prefHeight="100.0" prefWidth="200.0" text="clear" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
                                  <font>
                                     <Font name="Arial Bold" size="22.0" />
                                  </font>
                               </Button>
-                              <Button id="settingsButton" fx:id="snapButton" layoutY="328.0" mnemonicParsing="false" onAction="#snapButtonPressed" prefHeight="100.0" prefWidth="320.0" text="snap" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="0.0">
-                                 <font>
-                                    <Font name="Arial Bold" size="22.0" />
-                                 </font>
-                              </Button>
-                              <Button id="settingsButton" fx:id="Button2" layoutX="291.0" layoutY="353.0" mnemonicParsing="false" prefHeight="100.0" prefWidth="320.0" text="button" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                              <Button id="settingsButton" fx:id="snapButton" layoutX="200.0" layoutY="328.0" mnemonicParsing="false" onAction="#snapButtonPressed" prefHeight="100.0" prefWidth="238.0" text="snap" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0">
                                  <font>
                                     <Font name="Arial Bold" size="22.0" />
                                  </font>

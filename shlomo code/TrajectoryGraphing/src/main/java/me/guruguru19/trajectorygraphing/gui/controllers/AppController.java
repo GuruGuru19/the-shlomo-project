@@ -4,14 +4,13 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.chart.LineChart;
-import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import me.guruguru19.trajectorygraphing.gui.SettingsWindow;
 import me.guruguru19.trajectorygraphing.trajectory.GraphDrawer;
-import me.guruguru19.trajectorygraphing.trajectory.LunchPlan;
+import me.guruguru19.trajectorygraphing.trajectory.LaunchPlan;
 import me.guruguru19.trajectorygraphing.trajectory.Target;
 import me.guruguru19.trajectorygraphing.trajectory.TrajectoryCalc;
 
@@ -68,7 +67,7 @@ public class AppController {
     private void snapButtonPressed(ActionEvent event){
         GraphDrawer.snap(snapFrame);
         Target target = GraphDrawer.getTarget();
-        LunchPlan plan = TrajectoryCalc.calc(target.getMx(), target.getMy(), target.getMa());
+        LaunchPlan plan = TrajectoryCalc.calc(target.getMx(), target.getMy(), target.getMa());
 
 
         XYChart.Series series = new XYChart.Series<>();

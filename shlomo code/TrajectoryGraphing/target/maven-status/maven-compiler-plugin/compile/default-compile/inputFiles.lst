@@ -1,5 +1,10 @@
-D:\shlomocode\the-shlomo-project\shlomo code\TrajectoryGraphing\src\main\java\me\guruguru19\trajectorygraphing\ui\controllers\SettingsController.java
-D:\shlomocode\the-shlomo-project\shlomo code\TrajectoryGraphing\src\main\java\me\guruguru19\trajectorygraphing\ui\App.java
+D:\shlomocode\the-shlomo-project\shlomo code\TrajectoryGraphing\src\main\java\me\guruguru19\trajectorygraphing\trajectory\GraphDrawer.java
 D:\shlomocode\the-shlomo-project\shlomo code\TrajectoryGraphing\src\main\java\me\guruguru19\trajectorygraphing\Main.java
-D:\shlomocode\the-shlomo-project\shlomo code\TrajectoryGraphing\src\main\java\me\guruguru19\trajectorygraphing\ui\controllers\AppController.java
-D:\shlomocode\the-shlomo-project\shlomo code\TrajectoryGraphing\src\main\java\me\guruguru19\trajectorygraphing\ui\SettingsWindow.java
+D:\shlomocode\the-shlomo-project\shlomo code\TrajectoryGraphing\src\main\java\me\guruguru19\trajectorygraphing\gui\App.java
+D:\shlomocode\the-shlomo-project\shlomo code\TrajectoryGraphing\src\main\java\me\guruguru19\trajectorygraphing\trajectory\LaunchPlan.java
+D:\shlomocode\the-shlomo-project\shlomo code\TrajectoryGraphing\src\main\java\me\guruguru19\trajectorygraphing\trajectory\TrajectoryCalc.java
+D:\shlomocode\the-shlomo-project\shlomo code\TrajectoryGraphing\src\main\java\me\guruguru19\trajectorygraphing\trajectory\Target.java
+D:\shlomocode\the-shlomo-project\shlomo code\TrajectoryGraphing\src\main\java\me\guruguru19\trajectorygraphing\gui\controllers\AppController.java
+D:\shlomocode\the-shlomo-project\shlomo code\TrajectoryGraphing\src\main\java\me\guruguru19\trajectorygraphing\vision\TargetDetection.java
+D:\shlomocode\the-shlomo-project\shlomo code\TrajectoryGraphing\src\main\java\me\guruguru19\trajectorygraphing\gui\SettingsWindow.java
+D:\shlomocode\the-shlomo-project\shlomo code\TrajectoryGraphing\src\main\java\me\guruguru19\trajectorygraphing\gui\controllers\SettingsController.java
