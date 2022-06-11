@@ -97,4 +97,39 @@
          <Font size="14.0" />
       </font>
    </TextField>
+   <TextField id="ballDiameter" fx:id="hue_high_Box" layoutX="917.0" layoutY="130.0" promptText="hue high">
+      <font>
+         <Font size="18.0" />
+      </font>
+   </TextField>
+   <TextField id="ballDiameter" fx:id="saturation_high_Box" layoutX="917.0" layoutY="231.0" promptText="saturation high">
+      <font>
+         <Font size="18.0" />
+      </font>
+   </TextField>
+   <TextField id="ballDiameter" fx:id="hue_low_Box" layoutX="917.0" layoutY="179.0" promptText="hue low">
+      <font>
+         <Font size="18.0" />
+      </font>
+   </TextField>
+   <TextField id="ballDiameter" fx:id="saturation_low_Box" layoutX="917.0" layoutY="283.0" promptText="saturation low">
+      <font>
+         <Font size="18.0" />
+      </font>
+   </TextField>
+   <TextField id="ballDiameter" fx:id="value_high_Box" layoutX="917.0" layoutY="334.0" promptText="value high">
+      <font>
+         <Font size="18.0" />
+      </font>
+   </TextField>
+   <TextField id="ballDiameter" fx:id="value_low_Box" layoutX="917.0" layoutY="387.0" promptText="value low">
+      <font>
+         <Font size="18.0" />
+      </font>
+   </TextField>
+   <Text fill="WHITE" layoutX="920.0" layoutY="106.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Camera Vision settings">
+      <font>
+         <Font name="Arial Bold" size="24.0" />
+      </font>
+   </Text>
 </AnchorPane>

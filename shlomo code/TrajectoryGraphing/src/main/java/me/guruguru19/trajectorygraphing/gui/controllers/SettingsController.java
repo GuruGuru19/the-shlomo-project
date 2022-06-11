@@ -59,6 +59,24 @@ public class SettingsController {
     private Button exitButton;
 
     @FXML
+    private TextField hue_high_Box;
+
+    @FXML
+    private TextField hue_low_Box;
+
+    @FXML
+    private TextField saturation_high_Box;
+
+    @FXML
+    private TextField saturation_low_Box;
+
+    @FXML
+    private TextField value_high_Box;
+
+    @FXML
+    private TextField value_low_Box;
+
+    @FXML
     private void isBallBoxChanged(ActionEvent e) {
         boolean q = isBallBox.isSelected();
         ballDiameterBox.setDisable(!q);
@@ -150,6 +168,23 @@ public class SettingsController {
         }
 
         TrajectoryCalc.setInitialState(mountingAngle, mountingHight, dragCoefficient, projectileMass, dt, operation, targetHight, targetDistance, targetArea);
+
+        if (hue_high_Box.getText().isEmpty()||hue_low_Box.getText().isEmpty()||saturation_high_Box.getText().isEmpty()||saturation_low_Box.getText().isEmpty()||value_high_Box.getText().isEmpty()||value_low_Box.getText().isEmpty()){
+            System.out.println("color not updated");
+        }
+        else {
+            try{
+                int hh = Integer.parseInt(hue_high_Box.getText());
+                int hl = Integer.parseInt(hue_low_Box.getText());
+                int sh = Integer.parseInt(saturation_high_Box.getText());
+                int sl = Integer.parseInt(saturation_low_Box.getText());
+                int vh = Integer.parseInt(value_high_Box.getText());
+                int vl = Integer.parseInt(value_low_Box.getText());
+                TargetDetection.setColor(hh, hl, sh, sl, vh, vl);
+            }catch (Exception exception){
+                exception.printStackTrace();
+            }
+        }
 
         Stage window = (Stage)((Node)e.getSource()).getScene().getWindow();
         window.close();

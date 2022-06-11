@@ -23,19 +23,34 @@ import java.util.stream.Collectors;
 
 public class TargetDetection {
 
-    private static final int HUE_HIGH = 88;
-    private static final int HUE_LOW = 44;
+    private static int HUE_HIGH = 88;
+    private static int HUE_LOW = 44;
 
-    private static final int SATURATION_HIGH = 255;
-    private static final int SATURATION_LOW = 40;
+    private static int SATURATION_HIGH = 255;
+    private static int SATURATION_LOW = 40;
 
-    private static final int VALUE_HIGH = 255;
-    private static final int VALUE_LOW = 52;
+    private static int VALUE_HIGH = 255;
+    private static int VALUE_LOW = 52;
 
     private static final int AREA_FILTER = 500;
 
     private static int CAMERA_FOV_X = 16;
     private static int CAMERA_FOV_Y = 0;
+
+    public static void setColor(int hHigh, int hLow, int sHigh, int sLow, int vHigh, int vLow) {
+        System.out.println("old color HIGH("+HUE_HIGH+", "+SATURATION_HIGH+", "+VALUE_HIGH+") -> LOW("+HUE_LOW+", "+SATURATION_LOW+", "+VALUE_LOW+")");
+
+        HUE_HIGH = hHigh;
+        HUE_LOW = hLow;
+
+        SATURATION_HIGH = sHigh;
+        SATURATION_LOW = sLow;
+
+        VALUE_HIGH = vHigh;
+        VALUE_LOW = vLow;
+
+        System.out.println("new color HIGH("+hHigh+", "+sHigh+", "+vHigh+") -> LOW("+hLow+", "+sLow+", "+vLow+")");
+    }
 
     public static void setCameraFovX(int cameraFovX) {
         CAMERA_FOV_X = cameraFovX;

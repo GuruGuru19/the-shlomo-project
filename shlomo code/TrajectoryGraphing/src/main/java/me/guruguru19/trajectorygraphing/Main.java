@@ -6,18 +6,27 @@ import me.guruguru19.trajectorygraphing.trajectory.GraphDrawer;
 import me.guruguru19.trajectorygraphing.vision.TargetDetection;
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
+import org.opencv.osgi.OpenCVNativeLoader;
 import org.opencv.videoio.VideoCapture;
 
 public class Main {
 
-    static {System.loadLibrary(Core.NATIVE_LIBRARY_NAME);}
+    static {
+        //System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
+
+
+    }
 
     public static void main(String[] args) {
+        System.out.println(System.getProperty("java.library.path"));
         System.out.println("OpenCV Version: " + Core.VERSION);
         App app = new App();
 
+        OpenCVNativeLoader openCVNativeLoader = new OpenCVNativeLoader();
+        openCVNativeLoader.init();// tested on opencv-4.5.1-2
         app.startApp(args);
     }
+    //
 
     public static void vision(ImageView cameraFeed, ImageView thresholdFeed){
 //        final JPanel cameraPanel = new JPanel();
