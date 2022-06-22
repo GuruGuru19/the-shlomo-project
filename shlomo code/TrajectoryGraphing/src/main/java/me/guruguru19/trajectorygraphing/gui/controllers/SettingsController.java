@@ -89,6 +89,10 @@ public class SettingsController {
         saveButton.setDisable(!(targetDistanceBox.getText() != "" || targetHightBox.getText() != "" || targetAreaBox.getText() != "" ));
     }
 
+    /**
+     * saving the inputted settings and closes the window
+     * @param e
+     */
     @FXML
     private void saveButtonPressed(ActionEvent e){
         TrajectoryCalc.setDisplay_ballDiameter(ballDiameterBox.getText());
@@ -190,12 +194,19 @@ public class SettingsController {
         window.close();
     }
 
+    /**
+     * closes the window
+     * @param e
+     */
     @FXML
     void exitButtonPressed(ActionEvent e) {
         Stage window = (Stage)((Node)e.getSource()).getScene().getWindow();
         window.close();
     }
 
+    /**
+     * puts the known settings in the text-boxes
+     */
     public void init(){
         ballDiameterBox.setText(TrajectoryCalc.getDisplay_ballDiameter());
         projectileCrossSectionalAreaBox.setText(TrajectoryCalc.getDisplay_crossSectionalArea());

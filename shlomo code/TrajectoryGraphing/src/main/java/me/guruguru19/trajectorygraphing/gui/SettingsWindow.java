@@ -12,6 +12,9 @@ import me.guruguru19.trajectorygraphing.gui.controllers.SettingsController;
 import java.io.IOException;
 
 public class SettingsWindow {
+    /**
+     * opening the settings window
+     */
     public static void init() throws IOException {
         Stage stage = new Stage();
 

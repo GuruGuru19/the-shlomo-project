@@ -31,6 +31,9 @@ public class TrajectoryCalc {
     private static String display_crossSectionalArea = "";
     private static String display_Cd = "";
 
+    /**
+     * setting the initial state of the calculation
+     */
     public static void setInitialState(double cameraAngle, double cameraHight, double dragCoefficient, double projectileMass, double dt, CalcOperations calcOperation, double targetHight, double targetDistance, double targetArea){
         TrajectoryCalc.cameraAngle = cameraAngle;
         TrajectoryCalc.cameraHight = cameraHight;
@@ -50,10 +53,24 @@ public class TrajectoryCalc {
         return dt;
     }
 
+    /**
+     * calculating the drag coefficient
+     * @param cross_sectional_area the projectile's cross-sectional area facing the velocity direction
+     * @param drag_coefficient (Cd) a constant dependent of the shape of the projectile
+     * @param density_of_fluid
+     * @return the drag coefficient in the format of v^2*mu
+     */
     public static double dragCoefficientCalc(double cross_sectional_area, double drag_coefficient, double density_of_fluid){
         return 0.5*cross_sectional_area*density_of_fluid*drag_coefficient;
     }
 
+    /**
+     * calculating the trajectory
+     * @param tx target's degrees of offset from the middle of the frame in the x-Axis
+     * @param ty target's degrees of offset from the middle of the frame in the y-Axis
+     * @param ta target's area in pixels
+     * @return LaunchPlan
+     */
     public static LaunchPlan calc(double tx, double ty, double ta){
         System.out.println(calcOperation);
         System.out.println(targetDistance+", "+targetHight);
@@ -73,7 +90,11 @@ public class TrajectoryCalc {
         return p2;
     }
 
-
+    /**
+     *calculating the trajectory with drag force
+     * @param angleOffSet the angle offset from a straight line
+     * @return LaunchPlan
+     */
     private static LaunchPlan calcWithDrag(double angleOffSet){
         double at = radToDeg(Math.atan((targetHight-cameraHight)/(targetDistance)));
         double a0 = at + angleOffSet;
@@ -129,10 +150,21 @@ public class TrajectoryCalc {
         return bestTrajectory;
     }
 
+    /**
+     * pythagorean theorem calculation
+     * @return Math.sqrt(v1*v1+v2*v2)
+     */
     private static double pythagoreanTheorem(double v1, double v2){
         return Math.sqrt(v1*v1+v2*v2);
     }
 
+    /**
+     * calculating the closest distant of the trajectory to the (x,y) point
+     * @param list trajectory
+     * @param x
+     * @param y
+     * @return
+     */
     private static double err(ArrayList<Point> list, double x, double y){
         double min = Double.POSITIVE_INFINITY;
         for (Point p: list) {
@@ -143,6 +175,10 @@ public class TrajectoryCalc {
         return min;
     }
 
+    /**
+     * calculating the trajectory without drag force
+     * @return LaunchPlan
+     */
     private static LaunchPlan calcNoDrag(){
 
         double A = -((targetHight-cameraHight)/(targetDistance*targetDistance));
@@ -163,9 +199,21 @@ public class TrajectoryCalc {
         return new LaunchPlan(v0, a0, trajectory, -1);
     }
 
+    /**
+     *correcting the distance and hight of the target
+     * @param tx target's degrees of offset from the middle of the frame in the x-Axis
+     * @param ty target's degrees of offset from the middle of the frame in the y-Axis
+     * @param ta target's area in pixels
+     */
     public static void correct(double tx, double ty, double ta){
         if (calcOperation == CalcOperations.SET_TARGET_HIGHT){
-            targetDistance = (targetHight-cameraAngle)/Math.tan(degToRad(cameraAngle+tx));
+            System.out.println("taegetHight: "+targetHight);
+            System.out.println("cameraAngle: "+cameraAngle);
+            System.out.println("cameraHight: "+cameraHight);
+            System.out.println("tx: "+ty);
+            System.out.println("(targetHight-cameraHight): "+(targetHight-cameraHight));
+            System.out.println("Math.tan(degToRad(cameraAngle+tx): "+Math.tan(degToRad(cameraAngle+ty)));
+            targetDistance = (targetHight-cameraHight)/Math.tan(degToRad(cameraAngle+ty));
         }
         if (calcOperation == CalcOperations.SET_TARGET_AREA){
             //TODO: calc

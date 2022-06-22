@@ -11,11 +11,6 @@ import org.opencv.videoio.VideoCapture;
 
 public class Main {
 
-    static {
-        //System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
-
-
-    }
 
     public static void main(String[] args) {
         System.out.println(System.getProperty("java.library.path"));
@@ -28,6 +23,11 @@ public class Main {
     }
     //
 
+    /**
+     * starting the camera vision thread
+     * @param cameraFeed
+     * @param thresholdFeed
+     */
     public static void vision(ImageView cameraFeed, ImageView thresholdFeed){
 //        final JPanel cameraPanel = new JPanel();
 //        TargetDetection.createJFrame(cameraPanel);

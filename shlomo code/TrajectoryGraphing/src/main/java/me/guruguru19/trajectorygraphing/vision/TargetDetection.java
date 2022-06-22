@@ -23,20 +23,29 @@ import java.util.stream.Collectors;
 
 public class TargetDetection {
 
-    private static int HUE_HIGH = 88;
-    private static int HUE_LOW = 44;
+    private static int HUE_HIGH = 45;
+    private static int HUE_LOW = 20;
 
     private static int SATURATION_HIGH = 255;
     private static int SATURATION_LOW = 40;
 
     private static int VALUE_HIGH = 255;
-    private static int VALUE_LOW = 52;
+    private static int VALUE_LOW = 140;
 
     private static final int AREA_FILTER = 500;
 
-    private static int CAMERA_FOV_X = 16;
-    private static int CAMERA_FOV_Y = 0;
+    private static int CAMERA_FOV_X = 30;
+    private static int CAMERA_FOV_Y = 30;
 
+    /**
+     * updates the color of the thresholding
+     * @param hHigh hue high
+     * @param hLow hue low
+     * @param sHigh saturation high
+     * @param sLow saturation low
+     * @param vHigh value high
+     * @param vLow value low
+     */
     public static void setColor(int hHigh, int hLow, int sHigh, int sLow, int vHigh, int vLow) {
         System.out.println("old color HIGH("+HUE_HIGH+", "+SATURATION_HIGH+", "+VALUE_HIGH+") -> LOW("+HUE_LOW+", "+SATURATION_LOW+", "+VALUE_LOW+")");
 
@@ -60,6 +69,10 @@ public class TargetDetection {
         CAMERA_FOV_Y = cameraFovY;
     }
 
+    /**
+     * creates the JPanels for debugging
+     * @param panels
+     */
     public static void createJFrame(final JPanel... panels){
         final JFrame window = new JFrame("Shape Detection");
         window.setSize(new Dimension(panels.length*640, 480));
@@ -74,6 +87,11 @@ public class TargetDetection {
         window.setVisible(true);
     }
 
+    /**
+     * make the threshold frame
+     * @param frame un-threshold frame
+     * @return threshold frame
+     */
     public static Mat processedFrame(final Mat frame) {
 
         final Mat hsvFrame = new Mat(frame.height(), frame.width(), frame.type());
@@ -94,6 +112,11 @@ public class TargetDetection {
         return dilatedFrame;
     }
 
+    /**
+     * draw the contour on the frame
+     * @param processedImage threshold frame
+     * @param originalImage normal frame
+     */
     public static void markOuterContour(final Mat processedImage,
                                         final Mat originalImage) {
         // Find contours of an image
@@ -152,7 +175,12 @@ public class TargetDetection {
         );
     }
 
-
+    /**
+     * draws the middle point of the object on the normal frame
+     * @param processedImage threshold frame
+     * @param originalImage normal frame
+     * @return Target object
+     */
     public static Target markMiddleOfContour(final Mat processedImage,
                                              final Mat originalImage) {
         // Find contours of an image
@@ -216,11 +244,22 @@ public class TargetDetection {
         return new Target(-180,-180, 0);
     }
 
+    /**
+     * find the middle of a contour
+     * @param contour
+     * @return Point
+     */
     private static Point getCenterOfMass(MatOfPoint contour) {
         Moments moments = Imgproc.moments(contour);
         return new Point(moments.m10 / moments.m00, moments.m01 / moments.m00);
     }
 
+    /**
+     * converting a point on the frame to its angle offset from the middle (using the camera FOV)
+     * @param point
+     * @param frame
+     * @return Point in degrees
+     */
     private static Point convertToDeg(Point point, Mat frame){
         double xp = point.x-frame.width()/2.0;
         double yp = -point.y+frame.height()/2.0;
@@ -228,13 +267,18 @@ public class TargetDetection {
         //return new Point(xp,yp);
     }
 
+    /**
+     * draws a Mat (openCV) on a ImageView (javaFX)
+     * @param mat
+     * @param cameraFrame
+     */
     public static void drawImage(final Mat mat, final ImageView cameraFrame) {
         // Get buffered image from mat frame
-
         WritableImage showFrame = SwingFXUtils.toFXImage(convertMatToBufferedImage(mat), null);
         // Draw image to panel
         cameraFrame.setImage(showFrame);
     }
+
 
     public static void drawImage(final Mat mat, final JPanel panel) {
         // Get buffered image from mat frame
@@ -245,6 +289,9 @@ public class TargetDetection {
         graphics.drawImage(image, 0, 0, panel);
     }
 
+    /**
+     * converts Mat to a BufferedImage format
+     */
     private static BufferedImage convertMatToBufferedImage(final Mat mat) {
         // Create buffered image
         final BufferedImage bufferedImage = new BufferedImage(
@@ -259,14 +306,5 @@ public class TargetDetection {
         mat.get(0, 0, dataBuffer.getData());
 
         return bufferedImage;
-    }
-
-    public static void setFrame(Mat mat){
-        final BufferedImage bufferedImage = new BufferedImage(
-                mat.width(),
-                mat.height(),
-                mat.channels() == 1 ? BufferedImage.TYPE_BYTE_GRAY : BufferedImage.TYPE_3BYTE_BGR
-        );
-        WritableImage showFrame = SwingFXUtils.toFXImage(bufferedImage, null);
     }
 }

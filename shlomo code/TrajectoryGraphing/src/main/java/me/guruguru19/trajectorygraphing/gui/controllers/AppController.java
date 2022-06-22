@@ -51,6 +51,10 @@ public class AppController {
         return this.thresholdFrame;
     }
 
+    /**
+     * opening the settings window
+     * @param event
+     */
     @FXML
     private void settingsButtonPressed(ActionEvent event){
 
@@ -63,6 +67,10 @@ public class AppController {
         });
     }
 
+    /**
+     * starting the trajectory calculating and graphing
+     * @param event
+     */
     @FXML
     private void snapButtonPressed(ActionEvent event){
         GraphDrawer.snap(snapFrame);
@@ -77,6 +85,10 @@ public class AppController {
         graphChart.getData().add(series);
     }
 
+    /**
+     * clearing the graphs on the chart
+     * @param event
+     */
     @FXML
     void clearButtonPressed(ActionEvent event) {
         graphChart.getData().clear();

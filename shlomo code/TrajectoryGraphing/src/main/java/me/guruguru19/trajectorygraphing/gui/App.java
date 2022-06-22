@@ -15,6 +15,10 @@ import java.util.regex.Pattern;
 
 public class App extends Application {
 
+    /**
+     * starting the main screen
+     * @param args
+     */
     public void startApp(String[] args){
         launch(args);
     }

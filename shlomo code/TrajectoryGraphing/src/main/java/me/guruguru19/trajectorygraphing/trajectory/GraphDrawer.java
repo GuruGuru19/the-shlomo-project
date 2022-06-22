@@ -16,6 +16,10 @@ public class GraphDrawer {
         GraphDrawer.frame = frame;
     }
 
+    /**
+     *draws the current camera frame on a ImageView
+     * @param snapFeed ImageView object to output on
+     */
     public static void snap(ImageView snapFeed){//gui thread
         snap = frame;
         Mat processedFrame = TargetDetection.processedFrame(snap);
@@ -25,6 +29,11 @@ public class GraphDrawer {
     }
 
 
+    /**
+     * draws the trajectory (LaunchPlan object) on a XYChart Series
+     * @param lunchPlan trajectory
+     * @param series Series
+     */
     public static void draw(LaunchPlan lunchPlan, XYChart.Series series){
         series.setName("lunch velocity: "+lunchPlan.getExitVelocity()+" (m/2), lunch angle; "+lunchPlan.getLunchAngle()+"(deg)");
         if (Double.isNaN(lunchPlan.getExitVelocity())){
